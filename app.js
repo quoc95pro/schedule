@@ -19,26 +19,13 @@ await Promise.all([
 const elements = await page.$$(".inner h3"); 
 const views = await (await elements[0].getProperty('innerHTML')).jsonValue();
 const earned = await (await elements[1].getProperty('innerHTML')).jsonValue();
-
-const cash = new Cash({
-  views: views,
-  earned: Number.parseFloat(earned.substring(1)).toFixed(2),
-  date: new Date()
-});
-
-await cash.save(cash, (err, c) => {
-  if(err){
-    console.log(err);
-  }else{
-    console.log('get info 123link ok');
-  }
-});
+console.log('views: ' + views + ', earned: '+ earned);
 
 await browser.close();
 }
 
 
-var j = schedule.scheduleJob('57 3 * * *', function(){
+var j = schedule.scheduleJob('30 * * * *', function(){
 //   var generator = SitemapGenerator('https://taigamekhung.com', {
 //   maxDepth: 0,
 //   lastMod: true,
